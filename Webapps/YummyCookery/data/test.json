@@ -1,59 +1,64 @@
 {
-  "title": "Titel erstes Rezept",
-  "steps": [
+  "recipes": [
     {
-      "stepNo": 1,
-      "stepDescription": "First step text"
+      "title": "Titel erstes Rezept",
+      "steps": [
+        {
+          "stepNo": 1,
+          "stepDescription": "First step text"
+        },
+        {
+          "stepNo": 2,
+          "stepDescription": "Second step text"
+        }
+      ],
+      "ingredients": [
+        {
+          "ingredientName": "Ingredient name",
+          "ingredientUnit": "Ingredient unit",
+          "ingredientQuantity": "Ingredient quantity"
+        },
+        {
+          "ingredientName": "Ingredient name 2",
+          "ingredientUnit": "Ingredient unit 2",
+          "ingredientQuantity": "Ingredient quantity 2"
+        },
+        {
+          "ingredientName": "Ingredient name 3",
+          "ingredientUnit": "Ingredient unit 3",
+          "ingredientQuantity": "Ingredient quantity 3"
+        }
+      ]
     },
     {
-      "stepNo": 2,
-      "stepDescription": "Second step text"
-    }
-  ],
-  "ingredients": [
-    {
-      "ingredientName": "Ingredient name",
-      "ingredientUnit": "Ingredient unit",
-      "ingredientQuantity": "Ingredient quantity"
-    },
-    {
-      "ingredientName": "Ingredient name 2",
-      "ingredientUnit": "Ingredient unit 2",
-      "ingredientQuantity": "Ingredient quantity 2"
-    },
-    {
-      "ingredientName": "Ingredient name 3",
-      "ingredientUnit": "Ingredient unit 3",
-      "ingredientQuantity": "Ingredient quantity 3"
-    }
-  ],
-
-  "title": "Titel zweites Rezept",
-  "steps": [
-    {
-      "stepNo": 1,
-      "stepDescription": "First step text"
-    },
-    {
-      "stepNo": 2,
-      "stepDescription": "Second step text"
-    }
-  ],
-  "ingredients": [
-    {
-      "ingredientName": "Ingredient name",
-      "ingredientUnit": "Ingredient unit",
-      "ingredientQuantity": "Ingredient quantity"
-    },
-    {
-      "ingredientName": "Ingredient name 2",
-      "ingredientUnit": "Ingredient unit 2",
-      "ingredientQuantity": "Ingredient quantity 2"
-    },
-    {
-      "ingredientName": "Ingredient name 3",
-      "ingredientUnit": "Ingredient unit 3",
-      "ingredientQuantity": "Ingredient quantity 3"
+      "title": "Titel zweites Rezept",
+      "steps": [
+        {
+          "stepNo": 1,
+          "stepDescription": "First step text"
+        },
+        {
+          "stepNo": 2,
+          "stepDescription": "Second step text"
+        }
+      ],
+      "ingredients": [
+        {
+          "ingredientName": "Ingredient name",
+          "ingredientUnit": "Ingredient unit",
+          "ingredientQuantity": "Ingredient quantity"
+        },
+        {
+          "ingredientName": "Ingredient name 2",
+          "ingredientUnit": "Ingredient unit 2",
+          "ingredientQuantity": "Ingredient quantity 2"
+        },
+        {
+          "ingredientName": "Ingredient name 3",
+          "ingredientUnit": "Ingredient unit 3",
+          "ingredientQuantity": "Ingredient quantity 3"
+        }
+      ]
     }
   ]
 }
