@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+}
+
+header {
+  background-color: forestgreen;
+}
+
+nav {
+  background-color: lightblue;
+}
+
+main {
+  background-color: cadetblue;
+}
+
+article {
+  background-color: lightpink;
+}
+
+aside {
+  background-color: lightseagreen;
+}
+
+footer {
+  background-color: lightcoral;
+}
