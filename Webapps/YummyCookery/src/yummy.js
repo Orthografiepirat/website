@@ -1,22 +1,21 @@
 handlerGUI = {
-    setListVisible : function() {
-        document.getElementById("sectionList").style.display = "initial";
-        document.getElementById("sectionNew").style.display = "none";
-        document.getElementById("sectionDelete").style.display = "none";
-    },
-    setDeleteVisible : function() {
-        document.getElementById("sectionList").style.display = "none";
-        document.getElementById("sectionNew").style.display = "nooe";
-        document.getElementById("sectionDelete").style.display = "initial";
-    },
-    setNewVisible : function() {
-        document.getElementById("sectionList").style.display = "none";
-        document.getElementById("sectionNew").style.display = "initial";
-        document.getElementById("sectionDelete").style.display = "none";
+    setVisibleSection: function(param){
+        if(param === "list"){
+            document.getElementById("sectionList").style.display = "block";
+            document.getElementById("sectionNew").style.display = "none";
+            document.getElementById("sectionDelete").style.display = "none";
+        }else if(param === "new"){
+            document.getElementById("sectionList").style.display = "none";
+            document.getElementById("sectionNew").style.display = "block";
+            document.getElementById("sectionDelete").style.display = "none";
+        }else{
+            document.getElementById("sectionList").style.display = "none";
+            document.getElementById("sectionNew").style.display = "none";
+            document.getElementById("sectionDelete").style.display = "block";
+        }
     }
 }
 
-// toggle visible section of main navigation
-function toggleVisibleMainSection() {
 
-}
+//database methods
+//read json database and convert to objects
