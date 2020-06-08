@@ -1,40 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Awesome yummy cookery book</title>
-  <link rel="stylesheet" href="src/yummy.css" type="text/css">
-  <script src="src/yummy.js"></script>
-</head>
-<body>
-  <!---->
-  <header>
-    Banner header whatever
-  </header>
-  <!---->
-  <nav>
-    Navigation
-  </nav>
-  <!---->
-  <main>
-    Where most of the magic happens. main content of page
-    <!-- single entry of a certain type -->
-    <article>
-      single entry of certain type
-      <section id="articleHeader">
-        Article header
-      </section>
-    </article>
-  </main>
-  <!---->
-  <aside>
-    Related relevant content of main part/purpose
-  </aside>
-  <!---->
-  <footer>
-    @Copyright all the time by me. All rights not reserved.
-  </footer>
-</div>
-</body>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome yummy cookery book</title>
+    <link rel="stylesheet" href="src/yummy.css" type="text/css">
+    <script src="src/yummy.js"></script>
+  </head>
+
+  <body>
+    <header></header>
+    <nav>
+      <ul>
+        <li><button id="btnNavList" onclick="handlerGUI.setListVisible()">List</button></li>
+        <li><button id="btnNavNew" onclick="handlerGUI.setNewVisible()">New</button></li>
+        <li><button id="btnNavDelete" onclick="handlerGUI.setDeleteVisible()">Delete</button></li>
+      </ul>
+    </nav>
+    <main>
+      <section id="sectionList">List</section>
+      <section id="sectionNew">New</section>
+      <section id="sectionDelete">Delete</section>
+
+    </main>
+    <aside></aside>
+    <footer></footer>
+    </div>
+  </body>
+
 </html>
