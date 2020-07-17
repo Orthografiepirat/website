@@ -1,17 +1,28 @@
-"use strict"
+"use strict";
 
-let recipes = [];
-testData();
+var recipes = [];
+
+class Recipe{
+    constructor(name, howto, ingredients){
+        this.name = name;
+        this.howto = howto;
+        this.ingredients = ingredients;
+    }
+}
 
 let handlerGUI = {
     setVisibleSection: function(param){
         if(param === "list"){
             document.getElementById("sectionList").style.display = "block";
-            for(let i = 0; i <= recipes.length; i++){
-                listCreateSingleArticle(recipes[i].name, recipes[i].description, recipes[i].howto);
-            }
             document.getElementById("sectionNew").style.display = "none";
             document.getElementById("sectionDelete").style.display = "none";
+            
+            this.setBackToBeEmpty("sectionList");
+
+            for(let recipeKey in recipes){
+                createGUI.listCreateSingleArticle(recipes[recipeKey].name, recipes[recipeKey].howto, recipes[recipeKey].ingredients);
+            }
+
         }else if(param === "new"){
             document.getElementById("sectionList").style.display = "none";
             document.getElementById("sectionNew").style.display = "block";
@@ -21,77 +32,50 @@ let handlerGUI = {
             document.getElementById("sectionNew").style.display = "none";
             document.getElementById("sectionDelete").style.display = "block";
         }
+    },
+    setBackToBeEmpty: function(elementToBeSetBack){
+        document.getElementById(elementToBeSetBack).innerHTML = "";
     }
 }
 
-class Recipe{
-    constructor(name, description, howto){
-        this.name = name;
-        this.description = description;
-        this.howto = howto;
-    }
-}
-
-//create html
-function listCreateSingleArticle(name, description, howto){
-    let listSingleArticle = document.createElement("article");
-    listSingleArticle.classList.add();
-
-    let listSingleArticleName = document.createElement("input");
-    listSingleArticleName.type = "text";
-    listSingleArticleName.isContentEditable = "false";
-    listSingleArticleName.value = toString(name);
-
-    let listSingleArticleDescription = document.createElement("textarea");
-    listSingleArticleDescription.isContentEditable = "false";
-    listSingleArticleDescription.value = toString(description);
-
-    let listSingleArticleHowto = document.createElement("textarea");
-    listSingleArticleHowto.isContentEditable = "false";
-    listSingleArticleHowto.value = toString(howto);
-
-    listSingleArticle.appendChild(listSingleArticleName);
-    listSingleArticle.appendChild(listSingleArticleDescription);
-    listSingleArticle.appendChild(listSingleArticleHowto);
-
-    document.getElementById("sectionList").appendChild(listSingleArticle);
-}
-/*
 let createGUI = {
-    listCreateSingleArticle: function(name, description, howto){
+    listCreateSingleArticle: function(name, howto, ingredients){
         let listSingleArticle = document.createElement("article");
         listSingleArticle.classList.add();
 
         let listSingleArticleName = document.createElement("input");
         listSingleArticleName.type = "text";
-        listSingleArticleName.isContentEditable = "false";
-        listSingleArticleName.value = toString(name);
-
-        let listSingleArticleDescription = document.createElement("textarea");
-        listSingleArticleDescription.isContentEditable = "false";
-        listSingleArticleDescription.value = toString(description);
+        //listSingleArticleName.isContentEditable = "false";
+        listSingleArticleName.value = name;
 
         let listSingleArticleHowto = document.createElement("textarea");
-        listSingleArticleHowto.isContentEditable = "false";
-        listSingleArticleHowto.value = toString(howto);
+        listSingleArticleHowto.value = howto;
+
+        let listSingleArticleIngredients = document.createElement("input");
+        listSingleArticleIngredients.value = ingredients;
 
         listSingleArticle.appendChild(listSingleArticleName);
-        listSingleArticle.appendChild(listSingleArticleDescription);
         listSingleArticle.appendChild(listSingleArticleHowto);
+        listSingleArticle.appendChild(listSingleArticleIngredients);
 
         document.getElementById("sectionList").appendChild(listSingleArticle);
+    },
+    setBackToBeEmpty: function(elementToBeSetBack){
+        document.getElementById(elementToBeSetBack).innerHTML = "";
     }
-}*/
+}
 
 
 //create testdata
 function testData(){
-    let test1 = new Recipe("testname1", "description1", "howto1");
-    let test2 = new Recipe("testname2", "description2", "howto2");
-    let test3 = new Recipe("testname3", "description3", "howto3");
-    let test4 = new Recipe("testname4", "description4", "howto4"); 
+    let test1 = new Recipe("testname1", "howto1", "ingredients1");
+    let test2 = new Recipe("testname2", "howto2", "ingredients2");
+    let test3 = new Recipe("testname3", "howto3", "ingredients3");
+    let test4 = new Recipe("testname4", "howto4", "ingredients4"); 
     recipes.push(test1);
     recipes.push(test2);
     recipes.push(test3);
     recipes.push(test4);
 }
+
+testData();
