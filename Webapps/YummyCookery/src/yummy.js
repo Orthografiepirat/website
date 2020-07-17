@@ -20,13 +20,18 @@ let handlerGUI = {
             this.setBackToBeEmpty("sectionList");
 
             for(let recipeKey in recipes){
-                createGUI.listCreateSingleArticle(recipes[recipeKey].name, recipes[recipeKey].howto, recipes[recipeKey].ingredients);
+                createGUI.readSingleArticle(recipes[recipeKey].name, recipes[recipeKey].howto, recipes[recipeKey].ingredients);
             }
 
         }else if(param === "new"){
             document.getElementById("sectionList").style.display = "none";
             document.getElementById("sectionNew").style.display = "block";
             document.getElementById("sectionDelete").style.display = "none";
+
+            this.setBackToBeEmpty("sectionNew");
+
+            createGUI.createSingleArticle();
+
         }else{
             document.getElementById("sectionList").style.display = "none";
             document.getElementById("sectionNew").style.display = "none";
@@ -39,7 +44,8 @@ let handlerGUI = {
 }
 
 let createGUI = {
-    listCreateSingleArticle: function(name, howto, ingredients){
+    //cRud - section List elements
+    readSingleArticle: function(name, howto, ingredients){
         let listSingleArticle = document.createElement("article");
         listSingleArticle.classList.add();
 
@@ -60,11 +66,43 @@ let createGUI = {
 
         document.getElementById("sectionList").appendChild(listSingleArticle);
     },
-    setBackToBeEmpty: function(elementToBeSetBack){
-        document.getElementById(elementToBeSetBack).innerHTML = "";
+    //Crud - section New elements
+    createSingleArticle: function(){
+        let createSingleArticle = document.createElement("article");
+
+        let createSingleArticleName = document.createElement("input");
+        createSingleArticleName.id = "createNewRecipeName";
+        
+        let createSingleArticlehHowto = document.createElement("input");
+        createSingleArticlehHowto.id = "createNewRecipeHowto";
+
+        let createsingleArticleIngredients = document.createElement("input");
+        createsingleArticleIngredients.id = "createNewRecipeIngredients";
+
+
+        //Interaction with article
+        let btnSave = document.createElement("button");
+        btnSave.innerHTML = "Save";
+        btnSave.addEventListener("click", createNewRecipe);
+
+
+        createSingleArticle.appendChild(createSingleArticleName);
+        createSingleArticle.appendChild(createSingleArticlehHowto);
+        createSingleArticle.appendChild(createsingleArticleIngredients);
+        createSingleArticle.appendChild(btnSave);
+
+        document.getElementById("sectionNew").appendChild(createSingleArticle);
     }
+    
 }
 
+function createNewRecipe(){
+    let name = document.getElementById("createNewRecipeName").value;
+    let howto = document.getElementById("createNewRecipeHowto").value;
+    let ingredients = document.getElementById("createNewRecipeIngredients").value;
+    let newRecipe = new Recipe(name, howto, ingredients);
+    recipes.push(newRecipe);
+}
 
 //create testdata
 function testData(){
