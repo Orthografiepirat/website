@@ -1,9 +1,12 @@
 "use strict";
 
 var recipes = [];
+var recipeMap = new Map();
+var unitTypes = new Set();
 
 class Recipe{
     constructor(name, howto, ingredients){
+        this.customId = name;
         this.name = name;
         this.howto = howto;
         this.ingredients = ingredients;
@@ -15,27 +18,33 @@ let handlerGUI = {
         if(param === "list"){
             document.getElementById("sectionList").style.display = "block";
             document.getElementById("sectionNew").style.display = "none";
-            document.getElementById("sectionDelete").style.display = "none";
+            document.getElementById("sectionDisplaySingle").style.display = "none";
             
             this.setBackToBeEmpty("sectionList");
 
             for(let recipeKey in recipes){
-                createGUI.readSingleArticle(recipes[recipeKey].name, recipes[recipeKey].howto, recipes[recipeKey].ingredients);
+                createGUI.readRecipesGUI(recipes[recipeKey].name, recipes[recipeKey].howto, recipes[recipeKey].ingredients);
+            }
+
+            for(let [key, value] of recipeMap){
+                createGUI.readRecipesGUI(value.name, value.howto, value.ingredients);
             }
 
         }else if(param === "new"){
             document.getElementById("sectionList").style.display = "none";
             document.getElementById("sectionNew").style.display = "block";
-            document.getElementById("sectionDelete").style.display = "none";
+            document.getElementById("sectionDisplaySingle").style.display = "none";
 
             this.setBackToBeEmpty("sectionNew");
 
-            createGUI.createSingleArticle();
+            createGUI.createRecipeGUI();
 
         }else{
             document.getElementById("sectionList").style.display = "none";
             document.getElementById("sectionNew").style.display = "none";
-            document.getElementById("sectionDelete").style.display = "block";
+            document.getElementById("sectionDisplaySingle").style.display = "block";
+
+            createGUI.readSingleRecipeGUI();
         }
     },
     setBackToBeEmpty: function(elementToBeSetBack){
@@ -45,7 +54,7 @@ let handlerGUI = {
 
 let createGUI = {
     //cRud - section List elements
-    readSingleArticle: function(name, howto, ingredients){
+    readRecipesGUI: function(name, howto, ingredients){
         let listSingleArticle = document.createElement("article");
         listSingleArticle.classList.add();
 
@@ -67,7 +76,7 @@ let createGUI = {
         document.getElementById("sectionList").appendChild(listSingleArticle);
     },
     //Crud - section New elements
-    createSingleArticle: function(){
+    createRecipeGUI: function(){
         let createSingleArticle = document.createElement("article");
 
         let createSingleArticleName = document.createElement("input");
@@ -92,16 +101,63 @@ let createGUI = {
         createSingleArticle.appendChild(btnSave);
 
         document.getElementById("sectionNew").appendChild(createSingleArticle);
+    },
+    readSingleRecipeGUI: function(){
+        let createSingleArticle = document.createElement("article");
+
+        let createSingleArticleName = document.createElement("input");
+        createSingleArticleName.id = "displaySingleRecipeName";
+        
+        let createSingleArticlehHowto = document.createElement("input");
+        createSingleArticlehHowto.id = "displaySingleRecipeHowto";
+
+        let createsingleArticleIngredients = document.createElement("input");
+        createsingleArticleIngredients.id = "displaySingleRecipeIngredients";
+
+
+        //Interaction with article
+        let btnDelete = document.createElement("button");
+        btnDelete.innerHTML = "Delete";
+        btnDelete.addEventListener("click", function(){
+            let name = document.getElementById("displaySingleRecipeName").value;
+            let index = lookUpRecipeByName(name);
+            deleteRecipe(index);
+        });
+
+
+        createSingleArticle.appendChild(createSingleArticleName);
+        createSingleArticle.appendChild(createSingleArticlehHowto);
+        createSingleArticle.appendChild(createsingleArticleIngredients);
+        createSingleArticle.appendChild(btnDelete);
+
+        document.getElementById("sectionDisplaySingle").appendChild(createSingleArticle);
     }
     
 }
 
+//erstelle neues rezept und packe in liste/array
 function createNewRecipe(){
     let name = document.getElementById("createNewRecipeName").value;
     let howto = document.getElementById("createNewRecipeHowto").value;
     let ingredients = document.getElementById("createNewRecipeIngredients").value;
     let newRecipe = new Recipe(name, howto, ingredients);
     recipes.push(newRecipe);
+    recipeMap.set(newRecipe.customId, newRecipe);
+}
+
+function lookUpRecipeByName(key){
+    let index = recipeMap.get(key);
+    return index;
+}
+
+//löscht rezept aus liste/array
+function deleteRecipe(index){
+    let deleteRecipe = recipeMap.delete(index);
+    console.log(deleteRecipe);
+    //let deletedOnes = recipes.splice(index, 1);
+    //for (let deletedRecipe in deletedOnes){
+    //    console.log("Gelöscht: " + deletedRecipe.name);
+    //}
 }
 
 //create testdata
@@ -114,6 +170,10 @@ function testData(){
     recipes.push(test2);
     recipes.push(test3);
     recipes.push(test4);
+    recipeMap.set(test1.customId, test1);
+    recipeMap.set(test2.customId, test2);
+    recipeMap.set(test3.customId, test3);
+    recipeMap.set(test4.customId, test4);
 }
 
 testData();
