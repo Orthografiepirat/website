@@ -13,6 +13,15 @@ class Recipe{
     }
 }
 
+//Einzelne Zutat, am besten auch in einer Übersicht bearbeitbar sein genauso wie unit
+class Ingredient{
+    constructor(){
+        this.name = name;
+        this.unit = unit;
+        this.qty = qty;
+    }
+}
+
 let handlerGUI = {
     setVisibleSection: function(param){
         if(param === "list"){
@@ -66,12 +75,24 @@ let createGUI = {
         let listSingleArticleHowto = document.createElement("textarea");
         listSingleArticleHowto.value = howto;
 
-        let listSingleArticleIngredients = document.createElement("input");
-        listSingleArticleIngredients.value = ingredients;
+        let listSingleEntryDivForIngredients = document.createElement("div");
+        
+        //schleife für alle zutaten des rezepts
+        //durchsuche INGREDIENTS von RECIPE one by one
+        for(let entry of ingredients){
+            console.log(entry);
+            let listSingleArticleIngredients = document.createElement("input");
+            listSingleArticleIngredients.value = entry;
+            //füge einzelne zutaten dem gesamt zutaten div hinzu
+            listSingleEntryDivForIngredients.appendChild(listSingleArticleIngredients);
+        }
+
+        
 
         listSingleArticle.appendChild(listSingleArticleName);
         listSingleArticle.appendChild(listSingleArticleHowto);
-        listSingleArticle.appendChild(listSingleArticleIngredients);
+        listSingleArticle.appendChild(listSingleEntryDivForIngredients);
+
 
         document.getElementById("sectionList").appendChild(listSingleArticle);
     },
@@ -85,6 +106,7 @@ let createGUI = {
         let createSingleArticlehHowto = document.createElement("input");
         createSingleArticlehHowto.id = "createNewRecipeHowto";
 
+        
         let createsingleArticleIngredients = document.createElement("input");
         createsingleArticleIngredients.id = "createNewRecipeIngredients";
 
@@ -115,14 +137,8 @@ let createGUI = {
         createsingleArticleIngredients.id = "displaySingleRecipeIngredients";
 
 
-        //Interaction with article
-        let btnDelete = document.createElement("button");
-        btnDelete.innerHTML = "Delete";
-        btnDelete.addEventListener("click", function(){
-            let name = document.getElementById("displaySingleRecipeName").value;
-            let index = lookUpRecipeByName(name);
-            deleteRecipe(index);
-        });
+        //Interaction with article um type erweitern?
+        let btnDelete = this.createDeleteBtn("displaySingleRecipeName");
 
 
         createSingleArticle.appendChild(createSingleArticleName);
@@ -131,6 +147,15 @@ let createGUI = {
         createSingleArticle.appendChild(btnDelete);
 
         document.getElementById("sectionDisplaySingle").appendChild(createSingleArticle);
+    },
+    createDeleteBtn: function(getKeyFromThisElement){
+        let btnDelete = document.createElement("button");
+        btnDelete.innerHTML = "Delete";
+        btnDelete.addEventListener("click", function(){
+            let name = document.getElementById(getKeyFromThisElement).value; 
+            deleteRecipe(name);
+        });
+        return btnDelete;
     }
     
 }
@@ -145,11 +170,6 @@ function createNewRecipe(){
     recipeMap.set(newRecipe.customId, newRecipe);
 }
 
-function lookUpRecipeByName(key){
-    let index = recipeMap.get(key);
-    return index;
-}
-
 //löscht rezept aus liste/array
 function deleteRecipe(index){
     let deleteRecipe = recipeMap.delete(index);
@@ -162,10 +182,10 @@ function deleteRecipe(index){
 
 //create testdata
 function testData(){
-    let test1 = new Recipe("testname1", "howto1", "ingredients1");
-    let test2 = new Recipe("testname2", "howto2", "ingredients2");
-    let test3 = new Recipe("testname3", "howto3", "ingredients3");
-    let test4 = new Recipe("testname4", "howto4", "ingredients4"); 
+    let test1 = new Recipe("testname1", "howto1", ["ingredient1", "ingredient2in1"]);
+    let test2 = new Recipe("testname2", "howto2", ["ingredients2"]);
+    let test3 = new Recipe("testname3", "howto3", ["ingredients3"]);
+    let test4 = new Recipe("testname4", "howto4", ["ingredients4"]); 
     recipes.push(test1);
     recipes.push(test2);
     recipes.push(test3);
